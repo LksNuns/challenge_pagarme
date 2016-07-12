@@ -1,0 +1,29 @@
+<%= link_to "Logout", destroy_user_session_path, method: 'delete' %>
+
+<p id="notice"><%= notice %></p>
+
+<h2>Produtos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Valor Minimo</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |p| %>
+      <tr>
+        <td><%= p.name %></td>
+        <td><%= p.desc %></td>
+        <td><%= p.min_donation %></td>
+        <td><%= link_to 'Visualizar', product_path(p) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
