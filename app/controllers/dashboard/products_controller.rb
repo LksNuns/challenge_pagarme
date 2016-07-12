@@ -1,4 +1,4 @@
-class Dashboard::ProductsController < DashboardController
+class Dashboard::ProductsController < Dashboard::DashboardController
   before_action :set_avaliable_product, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -14,7 +14,7 @@ class Dashboard::ProductsController < DashboardController
     @product.user = current_user
 
     if @product.save
-      redirect_to @product, notice: 'Novo produto.'
+      redirect_to dashboard_products_path, notice: 'Novo produto.'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class Dashboard::ProductsController < DashboardController
 
   def update
     if @product.update(secure_params)
-      redirect_to @product, notice: 'Produto atualizado.'
+      redirect_to dashboard_products_path(@product), notice: 'Produto atualizado.'
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Dashboard::ProductsController < DashboardController
 
   def destroy
     @product.destroy
-    redirect_to posts_url, notice: 'Producto Removido'
+    redirect_to dashboard_products_path, notice: 'Producto Removido'
   end
 
   private

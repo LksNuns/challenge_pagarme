@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Produtos</h2>
+<%= link_to "Adicionar Produto", new_dashboard_product_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Valor Minimo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |p| %>
+      <tr>
+        <td><%= p.name %></td>
+        <td><%= p.desc %></td>
+        <td><%= p.min_donation %></td>
+        <td><%= link_to 'Visualizar', dashboard_product_path(p) %></td>
+        <td><%= link_to 'Editar', edit_dashboard_product_path(p) %></td>
+        <td><%= link_to 'Remover', dashboard_product_path(p), method: :delete, data: { confirm: 'Deseja remover?' } %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
