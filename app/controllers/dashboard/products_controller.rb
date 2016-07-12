@@ -2,7 +2,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
   before_action :set_avaliable_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @products = current_user.products
   end
 
   def new
@@ -42,7 +42,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
   private
 
   def set_avaliable_product
-    @product = Product.find(params[:id])
+    @product = current_user.products.find(params[:id])
   end
 
   def secure_params
