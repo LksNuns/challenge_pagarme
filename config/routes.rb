@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-
+  root to: "products#index"
   devise_for :users
 
   resources :products, only: [:index, :show]
-  
+
   namespace :dashboard do
     resources :products
   end
