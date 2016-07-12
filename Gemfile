@@ -11,8 +11,11 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-#
+# Payment
 gem 'pagarme'
+
+# authentication
+gem 'devise'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -20,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'capybara'
+  gem 'pry'
 end
 
 group :development do
