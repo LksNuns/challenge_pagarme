@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h2>Contas</h2>
-<%= link_to "Adicionar Conta", new_dashboard_bank_accounts_path %>
+<%= link_to "Adicionar Conta", new_dashboard_bank_account_path %>
 
 
 <table>
@@ -14,7 +14,7 @@
       <th>conta_dv</th>
       <th>document_number</th>
       <th>legal_name</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -30,8 +30,7 @@
         <td><%= ba.document_number %></td>
         <td><%= ba.legal_name %></td>
 
-        <td><%= link_to 'Visualizar', dashboard_product_path(p) %></td>
-        <td><%= link_to 'Remover', dashboard_product_path(p), method: :delete, data: { confirm: 'Deseja remover?' } %></td>
+        <td><%= link_to 'Remover', dashboard_bank_account_path(ba), method: :delete, data: { confirm: 'Deseja remover?' } %></td>
 
       </tr>
     <% end %>

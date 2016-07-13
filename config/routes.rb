@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :products
-    resources :bank_accounts, only: [:index. :new, :create, :remove]
+    resources :bank_accounts, only: [:index, :new, :create, :destroy], path: '/contas'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
