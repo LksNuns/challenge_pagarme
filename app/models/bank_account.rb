@@ -17,28 +17,32 @@
 #
 
 class BankAccount < ActiveRecord::Base
+  require 'pagarme'
+
   belongs_to :user
 
   validates :id_bank_account, :bank_code, :agencia, presence: true
   validates :agencia_dv, :conta, :conta_dv, :document_number, :legal_name, presence: true
 
-  # after_validation :send_to_pagarme
-  #
-  # protected
-  #
-  # def send_to_pagarme
-  #   ba = PagarMe::BankAccount.new({
-  #     :bank_code => self.bank_code,
-  #     :agencia => self.agencia,
-  #     :agencia_dv => self.agencia_dv,
-  #     :conta => self.conta,
-  #     :conta_dv => self.conta_dv,
-  #     :legal_name => self.legal_name,
-  #     :document_number => self.document_number
-  #   }).create
-  #   
-  #   self.id_bank_account = ba.id
-  #
-  # end
+  before_validation :send_to_pagarme
+
+  protected
+
+  def send_to_pagarme
+
+    bank_account = PagarMe::BankAccount.new({ bank_code: self.bank_code, agencia: self.agencia,
+      agencia_dv: self.agencia_dv, conta: self.conta, conta_dv: self.conta_dv,
+      legal_name: self.legal_name, document_number: self.document_number
+    })
+
+    begin
+      bank_account.create
+      self.id_bank_account = bank_account.id
+    rescue Exception => e
+      self.errors.add(:base, e.message)
+    end
+  end
+
+  
 
 end
