@@ -39,10 +39,8 @@ class BankAccount < ActiveRecord::Base
       bank_account.create
       self.id_bank_account = bank_account.id
     rescue Exception => e
-      self.errors.add(:base, e.message)
+      self.errors.add(:base, "Formato Inválido")
     end
   end
-
-  
 
 end
