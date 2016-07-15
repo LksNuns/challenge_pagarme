@@ -13,13 +13,13 @@
 #  conta_dv        :string           not null
 #  document_number :string           not null
 #  legal_name      :string           not null
-#  recipient_id    :integer          not null
+#  user_id         :integer
 #
 
 class BankAccount < ActiveRecord::Base
   require 'pagarme'
 
-  belongs_to :recipient
+  belongs_to :user
 
   validates :id_bank_account, :bank_code, :agencia, presence: true
   validates :agencia_dv, :conta, :conta_dv, :document_number, :legal_name, presence: true
