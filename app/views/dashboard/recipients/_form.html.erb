@@ -1,0 +1,20 @@
+<%= form_for([:dashboard, @recipient]) do |f| %>
+  <% if @recipient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipient.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @recipient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= select :recipient, :transfer_interval, Recipient::TRANSFER_INTERVAL %>
+
+  <%= label "transfer_day"%>
+  <%= text_field :transfer_day %>
+
+  <%= f.submit %>
+<% end %>

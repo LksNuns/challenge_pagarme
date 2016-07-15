@@ -13,8 +13,11 @@
 #
 
 class Recipient < ActiveRecord::Base
+  TRANSFER_INTERVAL = ["daily", "weekly", "monthly"]
+
   belongs_to :user
   has_many :products
   has_many :bank_accouts
+
 
 end
