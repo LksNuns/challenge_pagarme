@@ -1,8 +1,9 @@
 class Dashboard::ProductsController < Dashboard::DashboardController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :verify_recipient, except: [:destroy]
 
   def index
-    @products = current_user.products
+    @products = current_user.recipient.products
   end
 
   def new
@@ -11,8 +12,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
 
   def create
     @product = Product.new(secure_params)
-    @product.user = current_user
-
+    @product.recipient = current_user.recipient
     if @product.save
       redirect_to dashboard_products_path, notice: 'Novo produto.'
     else
@@ -40,6 +40,13 @@ class Dashboard::ProductsController < Dashboard::DashboardController
   end
 
   private
+
+  def verify_recipient
+    unless current_user.recipient
+      return redirect_to dashboard_bank_accounts_path,
+        error: "É necessário ter um recebedor para poder anunciar um produto"
+    end
+  end
 
   def set_product
     @product = current_user.products.find(params[:id])
