@@ -12,7 +12,19 @@
 
 <p>
   <strong>Valor Minimo</strong>
-  <%= @product.min_donation %>
+  <span id="min_amount"><%= @product.min_donation %></span>
 </p>
 
-<%= link_to 'Back', products_path, class: "btn btn-default" %>
+<%= text_field_tag "amount", @product.min_donation,
+                    {pattern: '[0-9]+([.][0-9]{1,2})*', placeholder:"23.45"} %>
+
+<form method="POST" action="/products">
+    <script type="text/javascript"
+        src="https://assets.pagar.me/checkout/checkout.js"
+        data-button-text="Pagar"
+        data-encryption-key="ek_test_EehICatMDGJ7TpTzZZZ7zBAMQOyp2H"
+        data-amount="1000">
+    </script>
+</form>
+
+<%= link_to 'Back', products_path %>

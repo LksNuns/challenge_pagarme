@@ -1,5 +1,5 @@
 class Dashboard::ProductsController < Dashboard::DashboardController
-  before_action :set_avaliable_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @products = current_user.products
@@ -41,7 +41,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
 
   private
 
-  def set_avaliable_product
+  def set_product
     @product = current_user.products.find(params[:id])
   end
 
