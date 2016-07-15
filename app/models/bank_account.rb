@@ -4,7 +4,6 @@
 #
 #  id              :integer          not null, primary key
 #  id_bank_account :integer          not null
-#  user_id         :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  bank_code       :string           not null
@@ -18,8 +17,6 @@
 
 class BankAccount < ActiveRecord::Base
   require 'pagarme'
-
-  belongs_to :user
 
   validates :id_bank_account, :bank_code, :agencia, presence: true
   validates :agencia_dv, :conta, :conta_dv, :document_number, :legal_name, presence: true
