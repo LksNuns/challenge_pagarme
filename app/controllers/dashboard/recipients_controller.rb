@@ -11,8 +11,9 @@ class Dashboard::RecipientsController < Dashboard::DashboardController
 
 
   def create
-    unless @bank_accounts.find(params[:recipient][:bank_account_id])
-      return redirect_to :new, notice: 'Conta inválida'
+    recipient_id = params[:recipient][:bank_account_id]
+    unless recipient_id && @bank_accounts.find(recipient_id)
+      return redirect_to dashboard_recipient_path, notice: 'Você Precisa selecionar uma Conta Válida'
     end
 
     @recipient = Recipient.new(secure_params)

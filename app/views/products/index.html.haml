@@ -1,7 +1,7 @@
 .alert.alert-sucess{role:'alert'}
   = notice
 
-%h2 Produtos
+%h2 Financiamento Colaborativo
 %table.table.table-striped
   %thead
     %tr
@@ -15,5 +15,5 @@
         %td= p.name
         %td= p.desc
         %td= p.min_donation
-        %td= link_to 'Visualizar', product_path(p)
+        %td= link_to 'Doar', product_path(p)
 %br
