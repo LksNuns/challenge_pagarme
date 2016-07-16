@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%h2 Produtos
+
+%table
+  %thead
+    %tr
+      %th Nome
+      %th Descrição
+      %th Valor Minimo
+      %th{colspan: 1}
+
+  %tbody
+    - @products.each do |p|
+      %tr
+        %td= p.name
+        %td= p.desc
+        %td= p.min_donation
+        %td= link_to 'Visualizar', product_path(p)
