@@ -1,0 +1,18 @@
+%p#notice= notice
+
+
+%h4
+  %strong Produto:
+= @product.name
+%h4
+  %strong Descição:
+= @product.desc
+
+%h4
+  %strong Valor Minimo:
+= @product.min_donation
+%br
+%br
+
+= link_to 'Editar', edit_dashboard_product_path(@product), class: "btn btn-default"
+= link_to 'Voltar', dashboard_products_path, class: "btn btn-default"

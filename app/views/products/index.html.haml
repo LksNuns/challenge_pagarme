@@ -1,15 +1,14 @@
-%p#notice= notice
+.alert.alert-sucess{role:'alert'}
+  = notice
 
 %h2 Produtos
-
-%table
+%table.table.table-striped
   %thead
     %tr
       %th Nome
       %th Descrição
       %th Valor Minimo
-      %th{colspan: 1}
-
+      %th{:colspan => "1"}
   %tbody
     - @products.each do |p|
       %tr
@@ -17,3 +16,4 @@
         %td= p.desc
         %td= p.min_donation
         %td= link_to 'Visualizar', product_path(p)
+%br

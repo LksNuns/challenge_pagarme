@@ -1,0 +1,26 @@
+= form_for([:dashboard, @product], html:{ class: "form-crud" }) do |f|
+
+  - if @product.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@product.errors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - @product.errors.full_messages.each do |message|
+          %li= message
+
+
+  %fieldset.form-group
+    = f.label "Nome", class:"col-sm-2 control-label"
+    .col-sm-5
+      = f.text_field :name, class: "form-control"
+  %fieldset.form-group
+    = f.label "Descrição", class:"col-sm-2 control-label"
+    .col-sm-5
+      = f.text_field :desc, class: "form-control"
+  %fieldset.form-group
+    = f.label "Valor Minimo", class:"col-sm-2 control-label"
+    .col-sm-3
+      = f.text_field :min_donation, class: "form-control"
+  .actions
+    = f.submit "Enviar", class: "btn btn-primary"
