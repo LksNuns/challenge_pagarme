@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     resources :products
-    resources :recipients
+    resource :recipient
     resources :bank_accounts, only: [:index, :new, :create, :destroy], path: '/contas'
   end
 

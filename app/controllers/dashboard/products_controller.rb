@@ -44,7 +44,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
   def verify_recipient
     unless current_user.recipient
       return redirect_to dashboard_bank_accounts_path,
-        error: "É necessário ter um recebedor para poder anunciar um produto"
+        notice: "É necessário ter um recebedor para poder anunciar um produto"
     end
   end
 

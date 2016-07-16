@@ -13,7 +13,7 @@
 #  conta_dv        :string           not null
 #  document_number :string           not null
 #  legal_name      :string           not null
-#  user_id         :integer
+#  recipient_id    :integer          not null
 #
 
 class BankAccount < ActiveRecord::Base
@@ -25,6 +25,11 @@ class BankAccount < ActiveRecord::Base
   validates :agencia_dv, :conta, :conta_dv, :document_number, :legal_name, presence: true
 
   before_validation :send_to_pagarme
+
+
+  def name
+    return "Ag: #{self.agencia}-#{self.agencia_dv}, Conta: #{self.conta}-#{self.conta_dv}"
+  end
 
   protected
 
