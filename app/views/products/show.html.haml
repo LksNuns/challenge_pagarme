@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%p
+  %strong Produto
+  = @product.name
+
+%p
+  %strong Descição
+  = @product.desc
+
+%p
+  %strong Valor Minimo
+  %span#min_amount= @product.min_donation
+  = text_field_tag "amount", @product.min_donation, {pattern: '[0-9]+([.][0-9]{1,2})*', placeholder:"23.45"}
+
+
+= form_for @product, url: checkout_product_path do |f|
+  %script{"data-amount" => "1000", "data-button-text" => "Pagar", "data-encryption-key" => "ek_test_EehICatMDGJ7TpTzZZZ7zBAMQOyp2H", :src => "https://assets.pagar.me/checkout/checkout.js", :type => "text/javascript"}
+= link_to 'Back', products_path
