@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716013939) do
+ActiveRecord::Schema.define(version: 20160716014953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20160716013939) do
   end
 
   create_table "recipients", force: :cascade do |t|
-    t.string  "id_recipient",        null: false
-    t.integer "active_bank_account", null: false
+    t.string  "id_recipient",    null: false
     t.integer "user_id"
+    t.integer "bank_account_id", null: false
   end
 
   add_index "recipients", ["id_recipient"], name: "index_recipients_on_id_recipient", using: :btree

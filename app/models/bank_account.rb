@@ -20,6 +20,7 @@ class BankAccount < ActiveRecord::Base
   require 'pagarme'
 
   belongs_to :user
+  has_one :recipient
 
   validates :id_bank_account, :bank_code, :agencia, presence: true
   validates :agencia_dv, :conta, :conta_dv, :document_number, :legal_name, presence: true

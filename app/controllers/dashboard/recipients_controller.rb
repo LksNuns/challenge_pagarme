@@ -1,6 +1,7 @@
 class Dashboard::RecipientsController < Dashboard::DashboardController
   before_action :set_recipient
-  before_action :has_recipient, :set_bank_accounts, only: [:new, :create]
+  before_action :set_bank_accounts, only: [:new, :create, :edit, :update]
+  before_action :has_recipient, only: [:new, :create]
   before_action :hasnt_recipient, except: [:new, :create]
 
 
@@ -10,9 +11,11 @@ class Dashboard::RecipientsController < Dashboard::DashboardController
 
 
   def create
+    unless @bank_accounts.find(params[:recipient][:bank_account_id])
+      return redirect_to :new, notice: 'Conta inválida'
+    end
+
     @recipient = Recipient.new(secure_params)
-    bank_account = @bank_accounts.find(params[:bank_account_id])
-    @recipient.bank_account_id = bank_account.id_bank_account if bank_account
     @recipient.user = current_user
 
     if @recipient.save
@@ -23,23 +26,7 @@ class Dashboard::RecipientsController < Dashboard::DashboardController
   end
 
   def show
-
-  end
-
-  def edit
-  end
-
-  def update
-    if @recipient.update(secure_params)
-      redirect_to dashboard_recipients_path(@recipient), notice: 'Recebedor Atualizado.'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @recipient.destroy
-    redirect_to dashboard_recipients_path, notice: 'Recebedor Removido'
+    @pagarme_recipient = PagarMe::Recipient.find(@recipient.id_recipient)
   end
 
   private
