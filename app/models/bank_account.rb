@@ -13,7 +13,7 @@
 #  conta_dv        :string           not null
 #  document_number :string           not null
 #  legal_name      :string           not null
-#  recipient_id    :integer          not null
+#  user_id         :integer
 #
 
 class BankAccount < ActiveRecord::Base
