@@ -1,14 +1,12 @@
 class Dashboard::RecipientsController < Dashboard::DashboardController
   before_action :set_recipient
-  before_action :set_bank_accounts, only: [:new, :create, :edit, :update]
+  before_action :set_bank_accounts, only: [:new, :create]
   before_action :has_recipient, only: [:new, :create]
   before_action :hasnt_recipient, except: [:new, :create]
-
 
   def new
     @recipient = Recipient.new
   end
-
 
   def create
     recipient_id = params[:recipient][:bank_account_id]
