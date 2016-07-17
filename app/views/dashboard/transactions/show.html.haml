@@ -1,0 +1,18 @@
+.alert.alert-sucess{role:'alert'}
+  = notice
+
+%h2= "Transação #{@payables.first.transaction_id}"
+=link_to "Voltar", dashboard_transactions_path
+%table.table.table-striped
+  %thead
+    %tr
+      %th recebedor
+      %th Valor Recebido
+      %th Stauts
+  %tbody
+    - @payables.each do |p|
+      %tr
+        %td= p.recipient.bank_account.legal_name
+        %td= formatted_real_coin(p.amount)
+        %td= p.status
+%br

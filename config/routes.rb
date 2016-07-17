@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :dashboard do
     resources :products
     resource :recipient
+    resources :transactions, only: [:index, :show]
     resources :bank_accounts, only: [:index, :new, :create, :destroy], path: '/contas'
   end
 

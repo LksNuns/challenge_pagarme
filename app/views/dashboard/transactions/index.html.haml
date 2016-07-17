@@ -1,0 +1,19 @@
+.alert.alert-sucess{role:'alert'}
+  = notice
+
+%h2 Doações Recebidas
+%table.table.table-striped
+  %thead
+    %tr
+      %th Produto
+      %th Transação
+      %th Valor Doado
+      %th{:colspan => "1"}
+  %tbody
+    - @transactions.each do |t|
+      %tr
+        %td= t['metadata']['product_id']
+        %td= t['id']
+        %td= formatted_real_coin(t['paid_amount'])
+        %td= link_to "Visualizar", dashboard_transaction_path(t['id'])
+%br

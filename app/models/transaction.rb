@@ -13,7 +13,9 @@ class Transaction
     raise Exception.new("Dinheiro não informado") unless amount
     raise Exception.new("Faltando Id do produto") unless product_id
     pagarme_amount = to_pagarme_amount(self.amount)
-    pagarme_recipient = set_recipient_by_product_id(self.product_id)
+    recipient = set_recipient_by_product_id(self.product_id)
+    pagarme_recipient = recipient.id_recipient
+    user = recipient.user_id
 
     raise Exception.new("Faltando recebedor") unless pagarme_recipient
     pagarme_split_rules = [
@@ -25,11 +27,18 @@ class Transaction
     transaction.amount = pagarme_amount
     transaction.split_rules = pagarme_split_rules
 
+    transaction.metadata = { user_id: user, product_id: product_id };
+
     begin
       transaction.charge
     rescue Exception => e
       raise e
     end
+  end
+
+  def self.by_user(id)
+    response = HTTParty.get("https://api.pagar.me/1/transactions?api_key=#{Rails.application.secrets.pagarme_api_key}&metadata[product_id]=1")
+    response.parsed_response
   end
 
   private
@@ -40,7 +49,7 @@ class Transaction
 
   def set_recipient_by_product_id(id)
     product = Product.find(id)
-    return product.recipient.id_recipient if product
+    return product.recipient if product
   end
 
 end
