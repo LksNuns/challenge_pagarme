@@ -17,8 +17,8 @@ class Transaction
 
     raise Exception.new("Faltando recebedor") unless pagarme_recipient
     pagarme_split_rules = [
-      { recipient_id: Rails.application.secrets.site_recipient, percentage: 20 },
-      { recipient_id: pagarme_recipient, percentage: 80 }
+      { recipient_id: Rails.application.secrets.site_recipient, percentage: 15 },
+      { recipient_id: pagarme_recipient, percentage: 85 }
     ]
 
     transaction = PagarMe::Transaction.find_by_id(self.token)
@@ -33,7 +33,7 @@ class Transaction
   end
 
   private
-  
+
   def to_pagarme_amount(money)
      return ((money.to_f)*100).to_i if money
   end
