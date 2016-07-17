@@ -1,0 +1,37 @@
+= form_for([:dashboard, @bank_account]) do |f|
+
+  - if @bank_account.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@bank_account.errors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - @bank_account.errors.full_messages.each do |message|
+          %li= message
+
+  %fieldset.form-group
+    = f.label "Código", class:"col-sm-2 control-label"
+    .col-sm-1
+      = f.text_field :bank_code, class: "form-control"
+  %fieldset.form-group
+    = f.label "Agência", class:"col-sm-2 control-label"
+    .col-sm-2
+      = f.text_field :agencia, class: "form-control"
+    .col-sm-1
+      = f.text_field :agencia_dv, class: "form-control"
+  %fieldset.form-group
+    = f.label "Conta", class:"col-sm-2 control-label"
+    .col-sm-2
+      = f.text_field :conta, class: "form-control"
+    .col-sm-1
+      = f.text_field :conta_dv, class: "form-control"
+  %fieldset.form-group
+    = f.label "Documento", class:"col-sm-2 control-label"
+    .col-sm-3
+      = f.text_field :document_number, class: "form-control"
+  %fieldset.form-group
+    = f.label "Favorecido", class:"col-sm-2 control-label"
+    .col-sm-3
+      = f.text_field :legal_name, class: "form-control"
+  .actions
+    = f.submit "Enviar", class: "btn btn-primary"

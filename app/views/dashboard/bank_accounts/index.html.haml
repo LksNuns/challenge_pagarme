@@ -1,0 +1,28 @@
+.alert.alert-sucess{role:'alert'}
+  = notice
+
+%h2 Contas
+= link_to "Adicionar Conta", new_dashboard_bank_account_path
+%table.table.table-striped
+  %thead
+    %tr
+      %th Código
+      %th Agência
+      %th Agência Dg
+      %th Conta
+      %th Conta Dg
+      %th Documento
+      %th Favorecido
+      %th{:colspan => "1"}
+  %tbody
+    - @bank_accounts.each do |ba|
+      %tr
+        %td= ba.bank_code
+        %td= ba.agencia
+        %td= ba.agencia_dv
+        %td= ba.conta
+        %td= ba.conta_dv
+        %td= ba.document_number
+        %td= ba.legal_name
+        %td= link_to 'Remover', dashboard_bank_account_path(ba), method: :delete, data: { confirm: 'Deseja remover?' }
+%br

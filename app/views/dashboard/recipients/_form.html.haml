@@ -1,0 +1,26 @@
+= form_for @recipient, url: dashboard_recipient_path do |f|
+
+  - if @recipient.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@recipient.errors.count, "error")
+        prohibited this post from being saved:
+      %ul
+        - @recipient.errors.full_messages.each do |message|
+          %li= message
+
+
+  %fieldset.form-group
+    = f.label "Frequência:", class:"col-sm-2 control-label"
+    .col-sm-5
+      = select 'recipient', 'transfer_interval', options_for_select([["Semanal", "weekly"], ["Diario", "daily"], ["Mensal", "monthly"]])
+  %fieldset.form-group
+    = f.label "Conta:", class:"col-sm-2 control-label"
+    .col-sm-5
+      = select_tag "recipient[bank_account_id]", options_from_collection_for_select(@bank_accounts, "id", "name")
+  %fieldset.form-group
+    =  label_tag('recipient[transfer_day]', "Dia do Pagamento:", class:"col-sm-2 control-label")
+    .col-sm-3
+      = text_field_tag('recipient[transfer_day]')
+  .actions
+    = f.submit "Enviar", class: "btn btn-primary"
