@@ -1,15 +1,15 @@
 class Dashboard::TransactionsController < Dashboard::DashboardController
 
   def index
-    @transactions = Transaction.by_user(current_user.id)
+    @products = current_user.products
   end
 
   def show
-    transaction = PagarMe::Transaction.find(params[:id])
-    unless current_user.id == transaction.metadata['user_id'].to_i
+    transaction = Transaction.find(params[:id])
+    unless current_user == transaction.product.user
       return redirect_to dashboard_transactions_path, notice: "Transação Inválida"
     end
-    @payables = transaction.payables
+    @payables = PagarMe::Transaction.find(transaction.id_transaction).payables
   end
 
 end

@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def checkout
-    transaction = Transaction.new(params)
+    transaction = PagarmeTransaction.new(params)
     begin
       transaction.charge
       redirect_to products_path, notice: "Sua doação foi realizada com sucesso"
