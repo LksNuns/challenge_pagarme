@@ -5,6 +5,7 @@
 ### Executar
 ##### Criar banco de dados:
 ```
+bundle install
 rake db:create && rake db:migrate
 ```
 #####  Rodar o server
