@@ -3,7 +3,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
   before_action :verify_recipient, except: [:destroy]
 
   def index
-    @products = current_user.recipient.products
+    @products = current_user.products
   end
 
   def new
@@ -12,7 +12,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
 
   def create
     @product = Product.new(secure_params)
-    @product.recipient = current_user.recipient
+    @product.user = current_user
     if @product.save
       redirect_to dashboard_products_path, notice: 'Novo produto.'
     else
@@ -49,7 +49,7 @@ class Dashboard::ProductsController < Dashboard::DashboardController
   end
 
   def set_product
-    @product = current_user.recipient.products.find(params[:id])
+    @product = current_user.products.find(params[:id])
   end
 
   def secure_params

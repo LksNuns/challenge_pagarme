@@ -8,11 +8,11 @@
 #  min_donation :float            not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  recipient_id :integer          not null
+#  user_id      :integer          not null
 #
 
 class Product < ActiveRecord::Base
-  belongs_to :recipient
+  belongs_to :user
 
   validates :name, :min_donation, presence: true
 end

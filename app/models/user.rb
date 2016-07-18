@@ -27,5 +27,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :recipient
+  has_many :products
   has_many :bank_accounts
 end

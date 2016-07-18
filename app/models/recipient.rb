@@ -17,7 +17,6 @@ class Recipient < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :bank_account
-  has_many :products
 
   before_validation :send_to_pagarme
 
